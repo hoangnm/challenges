@@ -20,8 +20,7 @@ export default function App() {
     });
   }, []);
 
-  const onCardClick = item => {
-    const { selectedAmount: amount } = state;
+  const onCardClick = (item, amount) => {
     const { id, currency } = item;
 
     sendPayment({ id, amount, currency }).then(function() {
@@ -42,31 +41,6 @@ export default function App() {
       }, 2000);
     });
   };
-
-  /* const cards = this.state.charities.map(function(item, i) {
-        const payments = [10, 20, 50, 100, 500].map((amount, j) => (
-          <label key={j}>
-            <input
-              type="radio"
-              name="payment"
-              onClick={function() {
-                self.setState({ selectedAmount: amount });
-              }}
-            />{' '}
-            {amount}
-          </label>
-        ));
-
-        return (
-          <DonateCard
-            key={item.id}
-            item={item}
-            payments={payments}
-            onClick={self.onCardClick}
-          />
-        );
-      });
-      */
 
   const style = {
     color: 'red',

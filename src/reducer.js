@@ -2,7 +2,6 @@ import { summaryDonations } from './helpers';
 
 export const initialData = {
   charities: [],
-  selectedAmount: 10,
   donate: 0,
   message: '',
 };
