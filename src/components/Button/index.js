@@ -1,16 +1,38 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+import { getColor, getTheme } from '../../theme';
 
 const Button = styled.button`
   appearance: none;
   display: inline-block;
   text-align: center;
-  line-height: inherit;
   text-decoration: none;
-  border-radius: 3px;
-  border: solid 1px blue;
-  color: blue;
-  padding: 8px 16px;
+  border-radius: ${getTheme('borderRadius', 'sm')};
+  border: solid 1px ${getColor('positive')};
+  color: ${getColor('positive')};
   cursor: pointer;
+  outline: none;
+  &:hover:not(:disabled) {
+    background-color: ${getColor('positive')};
+    color: ${getColor('light')};
+  }
+  &:active:not(:disabled) {
+    background-color: ${getColor('positiveDark')};
+    color: ${getColor('light')};
+  }
+  ${props => {
+    switch (props.size) {
+      case 'md':
+        return css`
+          padding: 8px 16px;
+          font-size: 14px;
+        `;
+    }
+  }};
 `;
+
+Button.defaultProps = {
+  size: 'md',
+};
 
 export default Button;
