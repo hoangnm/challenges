@@ -34,9 +34,7 @@ const DonateCard = ({ item, onClick }) => {
     <Card m="24px" position="relative">
       <Img src={`images/${item.image}`} alt={item.name} />
       <Flex justifyContent="space-between" alignItems="center" p="16px">
-        <Text color="grey" fontSize="18px">
-          {item.name}
-        </Text>
+        <Text fontSize="18px">{item.name}</Text>
         <Button onClick={() => showPayment(true)}>Donate</Button>
       </Flex>
       <PaymentBox

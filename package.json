@@ -17,6 +17,7 @@
     "react-dom": "^16.8.6",
     "react-transition-group": "^4.0.0",
     "styled-components": "^4.2.0",
+    "styled-system": "^4.2.1",
     "styled-transition-group": "^2.0.0"
   },
   "devDependencies": {

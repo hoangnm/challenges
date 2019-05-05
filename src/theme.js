@@ -4,26 +4,18 @@ const colors = {
   light: '#fff',
   light1: '#fffffff5',
   grey: '#787178',
+  grey1: '#c2bcc2',
 };
 
 const theme = {
   colors,
-  borderRadius: {
-    sm: '3px',
-    md: '4px',
+  radii: {
+    sm: 3,
+    md: 4,
   },
-};
-
-export const getColor = name => {
-  return props => {
-    return props.theme.colors[name];
-  };
-};
-
-export const getTheme = (name, sub) => {
-  return props => {
-    return props.theme[name][sub];
-  };
+  shadows: {
+    card: `0px 4px 8px 1px ${colors.grey1}`,
+  },
 };
 
 export default theme;

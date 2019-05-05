@@ -48,10 +48,10 @@ export default function App() {
 
   return (
     <div>
-      <Text as="h1" textAlign="center" color="grey">
+      <Text as="h1" textAlign="center">
         Tamboon React
       </Text>
-      <Text as="p" textAlign="center" color="grey">
+      <Text as="p" textAlign="center">
         All donations: {donate}
       </Text>
       <Text
