@@ -2,6 +2,7 @@ import React, { useEffect, useReducer } from 'react';
 
 import DonateCards from './components/DonateCards';
 import { Text } from './components/Text';
+import { Box } from './components/Box';
 import { getCharities, getPayments, sendPayment } from './apis';
 import reducer, { initialData } from './reducer';
 
@@ -47,10 +48,10 @@ export default function App() {
 
   return (
     <div>
-      <Text as="h1" textAlign="center">
+      <Text as="h1" textAlign="center" color="grey">
         Tamboon React
       </Text>
-      <Text as="p" textAlign="center">
+      <Text as="p" textAlign="center" color="grey">
         All donations: {donate}
       </Text>
       <Text
@@ -63,7 +64,9 @@ export default function App() {
       >
         {message}
       </Text>
-      <DonateCards items={charities} onClick={onCardClick} />
+      <Box p="16px 72px">
+        <DonateCards items={charities} onClick={onCardClick} />
+      </Box>
     </div>
   );
 }

@@ -9,7 +9,9 @@ const Payment = ({ onClick }) => {
   const [selectedAmount, setAmount] = useState(defaultAmount);
   return (
     <Flex justifyContent="center" alignItems="center" flexDirection="column">
-      <Text as="p">Select the amount to donate (USD)</Text>
+      <Text as="p" color="grey">
+        Select the amount to donate (USD)
+      </Text>
       <Box mb="24px">
         {payments.map(amount => (
           <Box as="label" key={amount} m="8px">

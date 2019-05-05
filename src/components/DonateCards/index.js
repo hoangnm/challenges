@@ -32,9 +32,11 @@ const DonateCard = ({ item, onClick }) => {
   const [shouldShowPayment, showPayment] = useState(false);
   return (
     <Card m="24px" position="relative">
-      <Img src={`images/${item.image}`} alt="image" />
+      <Img src={`images/${item.image}`} alt={item.name} />
       <Flex justifyContent="space-between" alignItems="center" p="16px">
-        <span>{item.name}</span>
+        <Text color="grey" fontSize="18px">
+          {item.name}
+        </Text>
         <Button onClick={() => showPayment(true)}>Donate</Button>
       </Flex>
       <PaymentBox

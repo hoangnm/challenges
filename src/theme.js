@@ -3,6 +3,7 @@ const colors = {
   positiveDark: '#0e43dc',
   light: '#fff',
   light1: '#fffffff5',
+  grey: '#787178',
 };
 
 const theme = {
