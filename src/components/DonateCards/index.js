@@ -6,6 +6,7 @@ import Card from '../Card';
 import Button from '../Button';
 import { Flex, Box } from '../Box';
 import { Text } from '../Text';
+import { Grid, Col } from '../Grid';
 import Payment from '../Payment';
 
 const Img = styled.img`
@@ -68,13 +69,13 @@ const DonateCard = ({ item, onClick }) => {
 
 const DonateCards = ({ items, onClick }) => {
   return (
-    <Flex flexWrap="wrap">
+    <Grid>
       {items.map(item => (
-        <Box width="50%" key={item.id}>
+        <Col lg="6" md="6" sm="12" key={item.id}>
           <DonateCard item={item} onClick={onClick} />
-        </Box>
+        </Col>
       ))}
-    </Flex>
+    </Grid>
   );
 };
 
