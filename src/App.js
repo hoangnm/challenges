@@ -3,15 +3,10 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import fetch from 'isomorphic-fetch';
 
+import DonateCard from './components/DonateCard';
 import { summaryDonations } from './helpers';
 
-
-const Card = styled.div`
-  margin: 10px;
-  border: 1px solid #ccc;
-`;
-
-export default connect((state) => state)(
+export default connect(state => state)(
   class App extends Component {
     constructor(props) {
       super();
@@ -20,23 +15,35 @@ export default connect((state) => state)(
         charities: [],
         selectedAmount: 10,
       };
+
+      this.onCardClick = this.onCardClick.bind(this);
     }
 
     componentDidMount() {
       const self = this;
       fetch('http://localhost:3001/charities')
-        .then(function(resp) { return resp.json(); })
+        .then(function(resp) {
+          return resp.json();
+        })
         .then(function(data) {
-          self.setState({ charities: data }) });
+          self.setState({ charities: data });
+        });
 
       fetch('http://localhost:3001/payments')
-        .then(function(resp) { return resp.json() })
+        .then(function(resp) {
+          return resp.json();
+        })
         .then(function(data) {
           self.props.dispatch({
             type: 'UPDATE_TOTAL_DONATE',
-            amount: summaryDonations(data.map((item) => (item.amount))),
+            amount: summaryDonations(data.map(item => item.amount)),
           });
-        })
+        });
+    }
+
+    onCardClick(item) {
+      const { selectedAmount } = this.state;
+      handlePay(item.id, selectedAmount, item.currency);
     }
 
     render() {
@@ -48,17 +55,20 @@ export default connect((state) => state)(
               type="radio"
               name="payment"
               onClick={function() {
-                self.setState({ selectedAmount: amount })
-              }} /> {amount}
+                self.setState({ selectedAmount: amount });
+              }}
+            />{' '}
+            {amount}
           </label>
         ));
 
         return (
-          <Card key={i}>
-            <p>{item.name}</p>
-            {payments}
-            <button onClick={handlePay.call(self, item.id, self.state.selectedAmount, item.currency)}>Pay</button>
-          </Card>
+          <DonateCard
+            key={i}
+            item={item}
+            payments={payments}
+            onClick={self.onCardClick}
+          />
         );
       });
 
@@ -91,7 +101,9 @@ function handlePay(id, amount, currency) {
       method: 'POST',
       body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
     })
-      .then(function(resp) { return resp.json(); })
+      .then(function(resp) {
+        return resp.json();
+      })
       .then(function() {
         self.props.dispatch({
           type: 'UPDATE_TOTAL_DONATE',
@@ -109,5 +121,5 @@ function handlePay(id, amount, currency) {
           });
         }, 2000);
       });
-  }
+  };
 }
