@@ -1,6 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 
 import DonateCards from './components/DonateCards';
+import { Text } from './components/Text';
 import { getCharities, getPayments, sendPayment } from './apis';
 import reducer, { initialData } from './reducer';
 
@@ -42,20 +43,26 @@ export default function App() {
     });
   };
 
-  const style = {
-    color: 'red',
-    margin: '1em 0',
-    fontWeight: 'bold',
-    fontSize: '16px',
-    textAlign: 'center',
-  };
   const { donate, message, charities } = state;
 
   return (
     <div>
-      <h1>Tamboon React</h1>
-      <p>All donations: {donate}</p>
-      <p style={style}>{message}</p>
+      <Text as="h1" textAlign="center">
+        Tamboon React
+      </Text>
+      <Text as="p" textAlign="center">
+        All donations: {donate}
+      </Text>
+      <Text
+        as="p"
+        textAlign="center"
+        fontWeight="bold"
+        fontSize="16px"
+        color="red"
+        m="1em 0"
+      >
+        {message}
+      </Text>
       <DonateCards items={charities} onClick={onCardClick} />
     </div>
   );

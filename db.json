@@ -121,6 +121,12 @@
       "amount": 100,
       "currency": "THB",
       "id": 15
+    },
+    {
+      "charitiesId": 1,
+      "amount": 500,
+      "currency": "THB",
+      "id": 16
     }
   ]
 }

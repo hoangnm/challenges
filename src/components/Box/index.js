@@ -5,11 +5,12 @@ export const Box = styled.div`
   width: ${props => props.width};
   padding: ${props => props.p};
   margin: ${props => props.m};
-  background: ${props => props.bg};
   top: ${props => props.top};
   right: ${props => props.right};
   left: ${props => props.left};
   bottom: ${props => props.bottom};
+  background: ${props => props.bg};
+  color: ${props => props.color};
 `;
 
 export const Flex = styled(Box)`
