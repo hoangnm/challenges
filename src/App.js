@@ -1,45 +1,31 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect, useReducer } from 'react';
 
 import DonateCards from './components/DonateCards';
 import { getCharities, getPayments, sendPayment } from './apis';
-import { summaryDonations } from './helpers';
+import reducer, { initialData } from './reducer';
 
-export default connect(state => state)(
-  class App extends Component {
-    constructor(props) {
-      super();
+export default function App(props) {
+  const [state, dispatch] = useReducer(reducer, initialData);
 
-      this.state = {
-        charities: [],
-        selectedAmount: 10,
-      };
+  useEffect(() => {
+    getCharities().then(function(data) {
+      dispatch({ type: 'SET_CHARITIES', payload: data });
+    });
 
-      this.onCardClick = this.onCardClick.bind(this);
-    }
-
-    componentDidMount() {
-      const self = this;
-      getCharities().then(function(data) {
-        self.setState({ charities: data });
+    getPayments().then(function(data) {
+      dispatch({
+        type: 'UPDATE_TOTAL_DONATE',
+        payload: data,
       });
+    });
+  }, []);
 
-      getPayments().then(function(data) {
-        self.props.dispatch({
-          type: 'UPDATE_TOTAL_DONATE',
-          amount: summaryDonations(data.map(item => item.amount)),
-        });
-      });
-    }
+  const onCardClick = item => {
+    const { selectedAmount } = state;
+    handlePay(item.id, selectedAmount, item.currency, props);
+  };
 
-    onCardClick(item) {
-      const { selectedAmount } = this.state;
-      handlePay(item.id, selectedAmount, item.currency);
-    }
-
-    render() {
-      const self = this;
-      /* const cards = this.state.charities.map(function(item, i) {
+  /* const cards = this.state.charities.map(function(item, i) {
         const payments = [10, 20, 50, 100, 500].map((amount, j) => (
           <label key={j}>
             <input
@@ -64,46 +50,39 @@ export default connect(state => state)(
       });
       */
 
-      const style = {
-        color: 'red',
-        margin: '1em 0',
-        fontWeight: 'bold',
-        fontSize: '16px',
-        textAlign: 'center',
-      };
-      const donate = this.props.donate;
-      const message = this.props.message;
+  const style = {
+    color: 'red',
+    margin: '1em 0',
+    fontWeight: 'bold',
+    fontSize: '16px',
+    textAlign: 'center',
+  };
+  const { donate, message, charities } = state;
 
-      return (
-        <div>
-          <h1>Tamboon React</h1>
-          <p>All donations: {donate}</p>
-          <p style={style}>{message}</p>
-          <DonateCards
-            items={this.state.charities}
-            onClick={this.onCardClick}
-          />
-        </div>
-      );
-    }
-  }
-);
+  return (
+    <div>
+      <h1>Tamboon React</h1>
+      <p>All donations: {donate}</p>
+      <p style={style}>{message}</p>
+      <DonateCards items={charities} onClick={onCardClick} />
+    </div>
+  );
+}
 
-function handlePay(id, amount, currency) {
-  const self = this;
+function handlePay(id, amount, currency, props) {
   return function() {
     sendPayment().then(function() {
-      self.props.dispatch({
+      props.dispatch({
         type: 'UPDATE_TOTAL_DONATE',
         amount,
       });
-      self.props.dispatch({
+      props.dispatch({
         type: 'UPDATE_MESSAGE',
         message: `Thanks for donate ${amount}!`,
       });
 
       setTimeout(function() {
-        self.props.dispatch({
+        props.dispatch({
           type: 'UPDATE_MESSAGE',
           message: '',
         });
