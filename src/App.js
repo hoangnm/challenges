@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import fetch from 'isomorphic-fetch';
 
-import DonateCard from './components/DonateCard';
+import DonateCards from './components/DonateCards';
 import { summaryDonations } from './helpers';
 
 export default connect(state => state)(
@@ -47,7 +47,7 @@ export default connect(state => state)(
 
     render() {
       const self = this;
-      const cards = this.state.charities.map(function(item, i) {
+      /* const cards = this.state.charities.map(function(item, i) {
         const payments = [10, 20, 50, 100, 500].map((amount, j) => (
           <label key={j}>
             <input
@@ -70,6 +70,7 @@ export default connect(state => state)(
           />
         );
       });
+      */
 
       const style = {
         color: 'red',
@@ -86,7 +87,10 @@ export default connect(state => state)(
           <h1>Tamboon React</h1>
           <p>All donations: {donate}</p>
           <p style={style}>{message}</p>
-          {cards}
+          <DonateCards
+            items={this.state.charities}
+            onClick={this.onCardClick}
+          />
         </div>
       );
     }
