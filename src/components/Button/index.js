@@ -8,17 +8,24 @@ const Button = styled.button`
   text-align: center;
   text-decoration: none;
   border-radius: ${getTheme('borderRadius', 'sm')};
-  border: solid 1px ${getColor('positive')};
-  color: ${getColor('positive')};
+  border: ${props =>
+    props.variant !== 'text' ? css`solid 1px ${getColor('positive')}` : 'none'};
+  color: ${props =>
+    props.variant !== 'text' ? getColor('positive')(props) : ''};
+  background-color: transparent;
   cursor: pointer;
   outline: none;
   &:hover:not(:disabled) {
-    background-color: ${getColor('positive')};
-    color: ${getColor('light')};
+    background-color: ${props =>
+      props.variant !== 'text' ? getColor('positive')(props) : ''};
+    color: ${props =>
+      props.variant !== 'text' ? getColor('light')(props) : ''};
   }
   &:active:not(:disabled) {
-    background-color: ${getColor('positiveDark')};
-    color: ${getColor('light')};
+    background-color: ${props =>
+      props.variant !== 'text' ? getColor('positiveDark')(props) : ''};
+    color: ${props =>
+      props.variant !== 'text' ? getColor('light')(props) : ''};
   }
   ${props => {
     switch (props.size) {

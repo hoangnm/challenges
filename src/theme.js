@@ -1,7 +1,8 @@
 const colors = {
   positive: '#2257f0',
-  positiveDark: '#0E43DC',
+  positiveDark: '#0e43dc',
   light: '#fff',
+  light1: '#fffffff5',
 };
 
 const theme = {
