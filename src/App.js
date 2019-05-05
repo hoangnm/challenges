@@ -63,7 +63,7 @@ export default connect(state => state)(
 
         return (
           <DonateCard
-            key={i}
+            key={item.id}
             item={item}
             payments={payments}
             onClick={self.onCardClick}
