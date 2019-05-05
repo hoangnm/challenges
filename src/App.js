@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import fetch from 'isomorphic-fetch';
 
 import DonateCards from './components/DonateCards';
+import { getCharities, getPayments, sendPayment } from './apis';
 import { summaryDonations } from './helpers';
 
 export default connect(state => state)(
@@ -20,24 +20,16 @@ export default connect(state => state)(
 
     componentDidMount() {
       const self = this;
-      fetch('http://localhost:3001/charities')
-        .then(function(resp) {
-          return resp.json();
-        })
-        .then(function(data) {
-          self.setState({ charities: data });
-        });
+      getCharities().then(function(data) {
+        self.setState({ charities: data });
+      });
 
-      fetch('http://localhost:3001/payments')
-        .then(function(resp) {
-          return resp.json();
-        })
-        .then(function(data) {
-          self.props.dispatch({
-            type: 'UPDATE_TOTAL_DONATE',
-            amount: summaryDonations(data.map(item => item.amount)),
-          });
+      getPayments().then(function(data) {
+        self.props.dispatch({
+          type: 'UPDATE_TOTAL_DONATE',
+          amount: summaryDonations(data.map(item => item.amount)),
         });
+      });
     }
 
     onCardClick(item) {
@@ -100,29 +92,22 @@ export default connect(state => state)(
 function handlePay(id, amount, currency) {
   const self = this;
   return function() {
-    fetch('http://localhost:3001/payments', {
-      method: 'POST',
-      body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
-    })
-      .then(function(resp) {
-        return resp.json();
-      })
-      .then(function() {
-        self.props.dispatch({
-          type: 'UPDATE_TOTAL_DONATE',
-          amount,
-        });
+    sendPayment().then(function() {
+      self.props.dispatch({
+        type: 'UPDATE_TOTAL_DONATE',
+        amount,
+      });
+      self.props.dispatch({
+        type: 'UPDATE_MESSAGE',
+        message: `Thanks for donate ${amount}!`,
+      });
+
+      setTimeout(function() {
         self.props.dispatch({
           type: 'UPDATE_MESSAGE',
-          message: `Thanks for donate ${amount}!`,
+          message: '',
         });
-
-        setTimeout(function() {
-          self.props.dispatch({
-            type: 'UPDATE_MESSAGE',
-            message: '',
-          });
-        }, 2000);
-      });
+      }, 2000);
+    });
   };
 }
