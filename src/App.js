@@ -9,11 +9,11 @@ export default function App() {
   const [state, dispatch] = useReducer(reducer, initialData);
 
   useEffect(() => {
-    getCharities().then(function(data) {
+    getCharities().then(data => {
       dispatch({ type: 'SET_CHARITIES', payload: data });
     });
 
-    getPayments().then(function(data) {
+    getPayments().then(data => {
       dispatch({
         type: 'UPDATE_TOTAL_DONATE',
         payload: data,
@@ -24,7 +24,7 @@ export default function App() {
   const onCardClick = (item, amount) => {
     const { id, currency } = item;
 
-    sendPayment({ id, amount, currency }).then(function() {
+    sendPayment({ id, amount, currency }).then(() => {
       dispatch({
         type: 'UPDATE_TOTAL_DONATE',
         payload: [{ amount }],
@@ -34,7 +34,7 @@ export default function App() {
         payload: `Thanks for donate ${amount}!`,
       });
 
-      setTimeout(function() {
+      setTimeout(() => {
         dispatch({
           type: 'UPDATE_MESSAGE',
           payload: '',
