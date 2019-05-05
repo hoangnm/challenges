@@ -4,7 +4,7 @@ import DonateCards from './components/DonateCards';
 import { getCharities, getPayments, sendPayment } from './apis';
 import reducer, { initialData } from './reducer';
 
-export default function App(props) {
+export default function App() {
   const [state, dispatch] = useReducer(reducer, initialData);
 
   useEffect(() => {
@@ -21,8 +21,26 @@ export default function App(props) {
   }, []);
 
   const onCardClick = item => {
-    const { selectedAmount } = state;
-    handlePay(item.id, selectedAmount, item.currency, props);
+    const { selectedAmount: amount } = state;
+    const { id, currency } = item;
+
+    sendPayment({ id, amount, currency }).then(function() {
+      dispatch({
+        type: 'UPDATE_TOTAL_DONATE',
+        payload: [{ amount }],
+      });
+      dispatch({
+        type: 'UPDATE_MESSAGE',
+        payload: `Thanks for donate ${amount}!`,
+      });
+
+      setTimeout(function() {
+        dispatch({
+          type: 'UPDATE_MESSAGE',
+          payload: '',
+        });
+      }, 2000);
+    });
   };
 
   /* const cards = this.state.charities.map(function(item, i) {
@@ -67,26 +85,4 @@ export default function App(props) {
       <DonateCards items={charities} onClick={onCardClick} />
     </div>
   );
-}
-
-function handlePay(id, amount, currency, props) {
-  return function() {
-    sendPayment().then(function() {
-      props.dispatch({
-        type: 'UPDATE_TOTAL_DONATE',
-        amount,
-      });
-      props.dispatch({
-        type: 'UPDATE_MESSAGE',
-        message: `Thanks for donate ${amount}!`,
-      });
-
-      setTimeout(function() {
-        props.dispatch({
-          type: 'UPDATE_MESSAGE',
-          message: '',
-        });
-      }, 2000);
-    });
-  };
 }

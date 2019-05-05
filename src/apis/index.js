@@ -17,7 +17,14 @@ export const getPayments = () => {
 export const sendPayment = ({ id, amount, currency }) => {
   return fetch(`${baseUrl}/payments`, {
     method: 'POST',
-    body: `{ "charitiesId": ${id}, "amount": ${amount}, "currency": "${currency}" }`,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      charitiesId: id,
+      amount: amount,
+      currency: currency,
+    }),
   }).then(function(resp) {
     return resp.json();
   });

@@ -18,7 +18,7 @@ const reducer = (state, action) => {
       });
     case 'UPDATE_MESSAGE':
       return Object.assign({}, state, {
-        message: action.message,
+        message: action.payload,
       });
     case 'SET_CHARITIES':
       return Object.assign({}, state, {
