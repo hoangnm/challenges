@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 
-const baseUrl = 'http://localhost:3001';
+import { baseUrl } from '../constants';
 
 export const getCharities = () => {
   return fetch(`${baseUrl}/charities`).then(function(resp) {

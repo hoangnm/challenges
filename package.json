@@ -9,7 +9,8 @@
   "scripts": {
     "server": "json-server --watch db.json --port 3001",
     "client": "webpack-dev-server",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "isomorphic-fetch": "^2.2.1",
@@ -38,6 +39,10 @@
     "webpack-dev-server": "^3.3.1"
   },
   "jest": {
+    "moduleDirectories": [
+      "node_modules",
+      "utils"
+    ],
     "coverageReporters": [
       "lcov",
       "json",

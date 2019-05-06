@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+
+import { payments } from '../../constants';
 import { Flex, Box } from '../Box';
 import { Text } from '../Text';
 import Button from '../Button';
+
 const defaultAmount = 10;
-const payments = [10, 20, 50, 100, 500];
 
 const Payment = ({ onClick }) => {
   const [selectedAmount, setAmount] = useState(defaultAmount);
@@ -12,7 +14,12 @@ const Payment = ({ onClick }) => {
       <Text as="p">Select the amount to donate (USD)</Text>
       <Box mb="24px">
         {payments.map(amount => (
-          <Box as="label" key={amount} m="8px">
+          <Box
+            data-testid={`payment-option-${amount}`}
+            as="label"
+            key={amount}
+            m="8px"
+          >
             <input
               type="radio"
               name="payment"
@@ -26,7 +33,12 @@ const Payment = ({ onClick }) => {
           </Box>
         ))}
       </Box>
-      <Button onClick={() => onClick(selectedAmount)}>Pay</Button>
+      <Button
+        data-testid="payment-payBtn"
+        onClick={() => onClick(selectedAmount)}
+      >
+        Pay
+      </Button>
     </Flex>
   );
 };

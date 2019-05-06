@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithTheme, cleanup, fireEvent } from '../../utils/testUtils';
+import { renderWithTheme, cleanup, fireEvent } from 'testUtils';
 
 import DonateCards from './';
 
@@ -22,7 +22,7 @@ jest.mock('react-transition-group/CSSTransition', () => {
   return FakeCSSTransition;
 });
 
-describe('DonateCards', () => {
+describe('DonateCards component', () => {
   let queries;
   let onItemClick;
   const items = [
