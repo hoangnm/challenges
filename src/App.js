@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer } from 'react';
 
 import DonateCards from './components/DonateCards';
-import { Text } from './components/Text';
-import { Box } from './components/Box';
+import { Text } from './components/core/Text';
+import { Box } from './components/core/Box';
 import { getCharities, getPayments, sendPayment } from './apis';
 import reducer, { initialData } from './reducer';
 

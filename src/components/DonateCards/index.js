@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import transition from 'styled-transition-group';
 
-import Card from '../Card';
-import Button from '../Button';
-import { Flex, Box } from '../Box';
-import { Text } from '../Text';
-import { Grid, Col } from '../Grid';
+import Card from '../core/Card';
+import Button from '../core/Button';
+import { Flex, Box } from '../core/Box';
+import { Text } from '../core/Text';
+import { Grid, Col } from '../core/Grid';
 import Payment from '../Payment';
 
 const Img = styled.img`

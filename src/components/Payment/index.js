@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import { payments } from '../../constants';
-import { Flex, Box } from '../Box';
-import { Text } from '../Text';
-import Button from '../Button';
+import { Flex, Box } from '../core/Box';
+import { Text } from '../core/Text';
+import Button from '../core/Button';
 
 const defaultAmount = 10;
 
