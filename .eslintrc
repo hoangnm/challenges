@@ -4,7 +4,12 @@
     "browser": true,
     "node": true
   },
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:flowtype/recommended"
+  ],
+  "plugins": ["flowtype"],
   "globals": {
     "Promise": true,
     "describe": true,
@@ -13,5 +18,8 @@
     "beforeEach": true,
     "afterEach": true,
     "jest": true
+  },
+  "rules": {
+    "react/prop-types": ["error", { "skipUndeclared": true }]
   }
 }

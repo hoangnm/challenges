@@ -1,7 +1,9 @@
+// @flow
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import transition from 'styled-transition-group';
 
+import { type Charity } from '../../types/charity';
 import Card from '../core/Card';
 import Button from '../core/Button';
 import { Flex, Box } from '../core/Box';
@@ -84,7 +86,12 @@ const DonateCard = ({ item, onClick }) => {
   );
 };
 
-const DonateCards = ({ items, onClick }) => {
+type DonateCardsProps = {
+  items: Charity[],
+  onClick: (item: Charity, amount: number) => void,
+};
+
+const DonateCards = ({ items, onClick }: DonateCardsProps) => {
   return (
     <Grid>
       {items.map(item => (

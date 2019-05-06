@@ -1,3 +1,4 @@
+// @flow
 import React, { useState } from 'react';
 
 import { payments } from '../../constants';
@@ -7,7 +8,11 @@ import Button from '../core/Button';
 
 const defaultAmount = 10;
 
-const Payment = ({ onClick }) => {
+type Props = {
+  onClick: (value: number) => void,
+};
+
+const Payment = ({ onClick }: Props) => {
   const [selectedAmount, setAmount] = useState(defaultAmount);
   return (
     <Flex justifyContent="center" alignItems="center" flexDirection="column">

@@ -1,3 +1,4 @@
+// @flow
 import React, { useEffect, useReducer } from 'react';
 
 import DonateCards from './components/DonateCards';

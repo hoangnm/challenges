@@ -1,6 +1,9 @@
+// @flow
 import fetch from 'isomorphic-fetch';
 
 import { baseUrl } from '../constants';
+import { type Charity } from '../types/charity';
+import { type Payment } from '../types/payment';
 
 const get = url => {
   return fetch(`${baseUrl}/${url}`).then(function(resp) {
@@ -20,15 +23,23 @@ const post = (url, body) => {
   });
 };
 
-export const getCharities = () => {
+export const getCharities = (): Promise<Charity[]> => {
   return get('charities');
 };
 
-export const getPayments = () => {
+export const getPayments = (): Promise<Payment[]> => {
   return get('payments');
 };
 
-export const sendPayment = ({ id, amount, currency }) => {
+export const sendPayment = ({
+  id,
+  amount,
+  currency,
+}: {
+  id: number,
+  amount: number,
+  currency: string,
+}) => {
   return post('payments', {
     charitiesId: id,
     amount: amount,
