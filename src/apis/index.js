@@ -2,30 +2,36 @@ import fetch from 'isomorphic-fetch';
 
 import { baseUrl } from '../constants';
 
-export const getCharities = () => {
-  return fetch(`${baseUrl}/charities`).then(function(resp) {
+const get = url => {
+  return fetch(`${baseUrl}/${url}`).then(function(resp) {
     return resp.json();
   });
 };
 
-export const getPayments = () => {
-  return fetch(`${baseUrl}/payments`).then(function(resp) {
-    return resp.json();
-  });
-};
-
-export const sendPayment = ({ id, amount, currency }) => {
-  return fetch(`${baseUrl}/payments`, {
+const post = (url, body) => {
+  return fetch(`${baseUrl}/${url}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({
-      charitiesId: id,
-      amount: amount,
-      currency: currency,
-    }),
+    body: JSON.stringify(body),
   }).then(function(resp) {
     return resp.json();
+  });
+};
+
+export const getCharities = () => {
+  return get('charities');
+};
+
+export const getPayments = () => {
+  return get('payments');
+};
+
+export const sendPayment = ({ id, amount, currency }) => {
+  return post('payments', {
+    charitiesId: id,
+    amount: amount,
+    currency: currency,
   });
 };
