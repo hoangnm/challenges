@@ -48,7 +48,7 @@ describe('DonateCards component', () => {
     cleanup();
   });
 
-  test('should render list card by items props', () => {
+  test('should render list card items', () => {
     init();
     const { getAllByTestId } = queries;
     const cards = getAllByTestId(/^donate-/);
