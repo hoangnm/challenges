@@ -12,6 +12,7 @@ import Payment from '../Payment';
 const Img = styled.img`
   width: 100%;
   height: 250px;
+  object-fit: cover;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
 `;
