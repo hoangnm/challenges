@@ -32,11 +32,23 @@ const PaymentBox = transition(Flex)`
 const DonateCard = ({ item, onClick }) => {
   const [shouldShowPayment, showPayment] = useState(false);
   return (
-    <Card m="24px" position="relative">
+    <Card
+      data-testid={`donate-${item.id}`}
+      m="24px"
+      position="relative"
+      as="section"
+    >
       <Img src={`images/${item.image}`} alt={item.name} />
       <Flex justifyContent="space-between" alignItems="center" p="16px">
-        <Text fontSize="18px">{item.name}</Text>
-        <Button onClick={() => showPayment(true)}>Donate</Button>
+        <Text fontSize="18px" as="span">
+          {item.name}
+        </Text>
+        <Button
+          data-testid={`${item.id}-donateBtn`}
+          onClick={() => showPayment(true)}
+        >
+          Donate
+        </Button>
       </Flex>
       <PaymentBox
         in={shouldShowPayment}
@@ -58,7 +70,11 @@ const DonateCard = ({ item, onClick }) => {
           }}
         />
         <Box position="absolute" right="10px" top="10px">
-          <Button variant="text" onClick={() => showPayment(false)}>
+          <Button
+            data-testid={`${item.id}-closeBtn`}
+            variant="text"
+            onClick={() => showPayment(false)}
+          >
             <Text fontSize="20px">x</Text>
           </Button>
         </Box>

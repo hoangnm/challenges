@@ -1,3 +1,2 @@
-export const summaryDonations = (danations) => (
-  danations.reduce((accumulator, value) => (accumulator + value))
-);
+export const summaryDonations = donations =>
+  donations.reduce((accumulator, value) => accumulator + value);
