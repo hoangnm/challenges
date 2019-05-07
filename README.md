@@ -7,6 +7,70 @@
 
 **Tamboon React** is a code challenge for frontend developer.
 
+## Usage
+
+### Install dependencies
+
+```bash
+yarn
+```
+
+### Running the web app
+
+```bash
+yarn run client
+```
+
+### Running mocked server
+
+```bash
+yarn run server
+```
+
+### Running unit test
+
+```bash
+yarn run test
+```
+
+or in watch mode
+
+```bash
+yarn run test:watch
+```
+
+## Notes
+
+### React Hooks
+
+I've never tried Hooks before, but after having a look, I think it's promising. After trying with this project, I see it helps to:
+
+- reduce boilerplate code.
+- easy to use and compose hooks together.
+- no need to convert functional component to class if we need to use state or side effects.
+
+### Flow typed
+
+There are two options when choosing typed system for js project: `Typescript` and `Flow`.
+
+I choose Flow because it's easier to apply with existing code base, just put some configs and add comment `// @flow` at the top of any js file, it will just work, we can still use the same webpack config with babel. One of the cons is the community of Flow is not big as Typescript, and Flow is used mostly in React applications only.
+
+### Design system
+
+Design system is recommended for any projects, it helps to develop app faster and branding the product easier. We will define rules like colors, spacing, fonts, ... at the beginning and put as configs. With `styled-components` and `design-system` library, it's easier to setup this system. `design-system` library also recommends another way to reuse and style the component, by allowing to put styles directly in component.
+
+https://github.com/styled-system/styled-system
+
+https://medium.com/styled-components/build-better-component-libraries-with-styled-system-4951653d54ee.
+
+### React-testing-library
+
+KentCDodds, author of this library, recommends us a better way to write test for component. There's no more shallow rendering component to test like `Enzyme` library.
+
+https://github.com/testing-library/react-testing-library
+
+https://kentcdodds.com/blog/why-i-never-use-shallow-rendering.
+
 ## Scenario
 
 Once upon a time.. nope!  
@@ -28,7 +92,7 @@ Well, grap your guns, stock up your food and bring down your armor. We gonna nee
 - [x] Make the donation feature works correctly.
   - Amount in all donations should be displayed correctly despite users close and come back later.
   - Database (db.json) should have the new valid data when paid.
-- [ ] Refactor the code to be more readable and enhance reusability.
+- [x] Refactor the code to be more readable and enhance reusability.
 - [x] Use only [styled-component](https://www.styled-components.com/) for styling part.
 - [x] Write a nice commit message and order it well.
 - [x] Display well in most modern browser (Google Chrome, Safari, Firefox).
