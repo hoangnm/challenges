@@ -49,9 +49,7 @@ describe('App component', () => {
   });
 
   test('should fetch data when component is mounted', done => {
-    act(() => {
-      init();
-    });
+    init();
     const { getByTestId, getAllByTestId } = queries;
     const donations = getByTestId('donations');
 
@@ -69,9 +67,7 @@ describe('App component', () => {
   });
 
   test('should send payment when card item is clicked', done => {
-    act(() => {
-      init();
-    });
+    init();
 
     sendPayment.mockReturnValueOnce(Promise.resolve());
 

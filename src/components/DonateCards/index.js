@@ -79,7 +79,7 @@ const DonateCard = ({ item, onClick }) => {
       >
         {shouldShowSuccess && (
           <Text
-            data-testId={`${item.id}-message`}
+            data-testid={`${item.id}-message`}
             as="div"
             textAlign="center"
             fontWeight="bold"

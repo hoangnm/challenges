@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithTheme, cleanup, fireEvent, wait } from 'testUtils';
+import { renderWithTheme, cleanup, fireEvent, wait, act } from 'testUtils';
 
 import DonateCards from './';
 
@@ -111,7 +111,9 @@ describe('DonateCards component', () => {
       expect(onItemClick).toHaveBeenCalledWith(items[0], amount);
       expect(message.textContent).toBe('Thanks for donate !');
 
-      jest.runAllTimers();
+      act(() => {
+        jest.runAllTimers();
+      });
 
       payment = queryByText('Pay');
       message = queryByTestId(`${items[0].id}-message`);

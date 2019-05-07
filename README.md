@@ -57,7 +57,7 @@ I choose Flow because it's easier to apply with existing code base, just put som
 
 ### Design system
 
-Design system is recommended for any projects, it helps to develop app faster and branding the product easier. We will define rules like colors, spacing, fonts, ... at the beginning and put as configs. With `styled-components` and `design-system` library, it's easier to setup this system. `design-system` library also recommends another way to reuse and style the component, by allowing to put styles directly in component.
+Design system is recommended for any projects, it helps to develop app faster and branding the product easier. We will define rules like colors, spacing, fonts, ... at the beginning and put as configs. With `styled-components` and `design-system` library, it's easier to setup this system. `design-system` library also recommends another way to reuse and style the component, by allowing to put styles directly using component props.
 
 https://github.com/styled-system/styled-system
 
@@ -70,6 +70,9 @@ KentCDodds, author of this library, recommends us a better way to write test for
 https://github.com/testing-library/react-testing-library
 
 https://kentcdodds.com/blog/why-i-never-use-shallow-rendering.
+
+There is warning when you running test:
+https://github.com/testing-library/react-testing-library/issues/281
 
 ## Scenario
 
