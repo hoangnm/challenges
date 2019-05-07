@@ -3,7 +3,6 @@ import React, { useEffect, useReducer } from 'react';
 
 import DonateCards from './components/DonateCards';
 import { Text } from './components/core/Text';
-import { Box } from './components/core/Box';
 import { getCharities, getPayments, sendPayment } from './apis';
 import reducer, { initialData } from './reducer';
 
@@ -63,9 +62,7 @@ export default function App() {
       >
         {message}
       </Text>
-      <Box p="16px 72px">
-        <DonateCards items={charities} onClick={onCardClick} />
-      </Box>
+      <DonateCards items={charities} onClick={onCardClick} />
     </div>
   );
 }

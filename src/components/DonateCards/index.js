@@ -8,7 +8,7 @@ import Card from '../core/Card';
 import Button from '../core/Button';
 import { Flex, Box } from '../core/Box';
 import { Text } from '../core/Text';
-import { Grid, Col } from '../core/Grid';
+import { Grid, Col, Container } from '../core/Grid';
 import Payment from '../Payment';
 
 const Img = styled.img`
@@ -37,7 +37,7 @@ const DonateCard = ({ item, onClick }) => {
   return (
     <Card
       data-testid={`donate-${item.id}`}
-      m="24px"
+      m="20px"
       position="relative"
       as="section"
     >
@@ -93,13 +93,15 @@ type DonateCardsProps = {
 
 const DonateCards = ({ items, onClick }: DonateCardsProps) => {
   return (
-    <Grid>
-      {items.map(item => (
-        <Col lg="6" md="6" sm="12" key={item.id}>
-          <DonateCard item={item} onClick={onClick} />
-        </Col>
-      ))}
-    </Grid>
+    <Container>
+      <Grid>
+        {items.map(item => (
+          <Col sx="12" lg="6" md="6" sm="12" key={item.id}>
+            <DonateCard item={item} onClick={onClick} />
+          </Col>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 

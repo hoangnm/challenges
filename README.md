@@ -30,13 +30,13 @@ Well, grap your guns, stock up your food and bring down your armor. We gonna nee
   - Database (db.json) should have the new valid data when paid.
 - [ ] Refactor the code to be more readable and enhance reusability.
 - [x] Use only [styled-component](https://www.styled-components.com/) for styling part.
-- [ ] Write a nice commit message and order it well.
+- [x] Write a nice commit message and order it well.
 - [x] Display well in most modern browser (Google Chrome, Safari, Firefox).
 
 #### Bonus
 
-- [ ] Supporting different screen sizes (responsive).
-- [ ] Write helpers or components unit tests with [jest](https://facebook.github.io/jest/).
+- [x] Supporting different screen sizes (responsive).
+- [x] Write helpers or components unit tests with [jest](https://facebook.github.io/jest/).
 
 ## Rules
 

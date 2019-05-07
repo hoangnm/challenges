@@ -10,8 +10,32 @@ const screenLg = '1200px';
 const screenMd = '1024px';
 const screenSm = '768px';
 
+export const Container = styled.div`
+  margin-left: auto;
+  margin-right: auto;
+  @media (min-width: ${screenSm}) {
+    width: ${screenSm};
+  }
+
+  @media (min-width: ${screenMd}) {
+    width: ${screenMd};
+  }
+
+  @media (min-width: ${screenLg}) {
+    width: ${screenLg};
+  }
+`;
+
 export const Col = styled(Box)`
   flex: 1;
+
+  ${props =>
+    props.sx
+      ? css`
+          max-width: ${props => getWidth(props.sx)}%;
+          flex-basis: ${props => getWidth(props.sx)}%;
+        `
+      : ''};
 
   @media (min-width: ${screenSm}) {
     ${props =>
@@ -44,19 +68,8 @@ export const Col = styled(Box)`
   }
 `;
 
-const gutters = {
-  default: 4,
-  md: 6,
-};
-
 export const Grid = styled(Box)`
   display: flex;
   flex-direction: row;
-  margin-left: -${props => gutters[props.gutter || 'default']}px;
-  margin-right: -${props => gutters[props.gutter || 'default']}px;
   flex-wrap: wrap;
-  ${Col} {
-    padding-left: ${props => gutters[props.gutter || 'default']}px;
-    padding-right: ${props => gutters[props.gutter || 'default']}px;
-  }
 `;
