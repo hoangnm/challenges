@@ -24,45 +24,25 @@ export default function App() {
 
   const onCardClick = (item, amount) => {
     const { id, currency } = item;
-    sendPayment({ id, amount, currency }).then(() => {
+    return sendPayment({ id, amount, currency }).then(() => {
       dispatch({
         type: 'UPDATE_TOTAL_DONATE',
         payload: [{ amount }],
       });
-      dispatch({
-        type: 'UPDATE_MESSAGE',
-        payload: `Thanks for donate ${amount}!`,
-      });
-      setTimeout(() => {
-        dispatch({
-          type: 'UPDATE_MESSAGE',
-          payload: '',
-        });
-      }, 2000);
     });
   };
 
-  const { donate, message, charities } = state;
+  const { donate, charities } = state;
   return (
     <div>
       <Text as="h1" textAlign="center">
         Tamboon React
       </Text>
-      <Text data-testid="donations" as="p" textAlign="center">
-        All donations:{' '}
+      <Text data-testid="donations" as="p" textAlign="center" fontSize="20px">
+        All donations (THB):{' '}
         <Text as="span" fontWeight="bold" color="positive">
           {donate}
         </Text>
-      </Text>
-      <Text
-        data-testId="message"
-        as="p"
-        textAlign="center"
-        fontWeight="bold"
-        color="positive"
-        m="1em 0"
-      >
-        {message}
       </Text>
       <DonateCards items={charities} onClick={onCardClick} />
     </div>

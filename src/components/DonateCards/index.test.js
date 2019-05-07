@@ -1,5 +1,5 @@
 import React from 'react';
-import { renderWithTheme, cleanup, fireEvent } from 'testUtils';
+import { renderWithTheme, cleanup, fireEvent, wait } from 'testUtils';
 
 import DonateCards from './';
 
@@ -91,17 +91,35 @@ describe('DonateCards component', () => {
     expect(payment).toBeNull();
   });
 
-  test('should trigger onClick when click payment is triggered', () => {
+  test('should show success message when click payment is triggered', done => {
     init();
-    const { getByTestId, queryByText } = queries;
+
+    onItemClick.mockReturnValueOnce(Promise.resolve());
+
+    const { getByTestId, queryByText, queryByTestId } = queries;
     const donateBtn = getByTestId(`${items[0].id}-donateBtn`);
     fireEvent.click(donateBtn);
     let payment = queryByText('Pay');
     fireEvent.click(payment);
-    payment = queryByText('Pay');
-    const amount = 10;
 
-    expect(payment).toBeNull();
-    expect(onItemClick).toHaveBeenCalledWith(items[0], amount);
+    jest.useFakeTimers();
+
+    wait(onItemClick).then(() => {
+      let message = queryByTestId(`${items[0].id}-message`);
+      const amount = 10;
+
+      expect(onItemClick).toHaveBeenCalledWith(items[0], amount);
+      expect(message.textContent).toBe('Thanks for donate !');
+
+      jest.runAllTimers();
+
+      payment = queryByText('Pay');
+      message = queryByTestId(`${items[0].id}-message`);
+
+      expect(message).toBeNull();
+      expect(payment).toBeNull();
+
+      done();
+    });
   });
 });

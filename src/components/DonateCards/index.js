@@ -34,6 +34,16 @@ const PaymentBox = transition(Flex)`
 
 const DonateCard = ({ item, onClick }) => {
   const [shouldShowPayment, showPayment] = useState(false);
+  const [shouldShowSuccess, showSuccess] = useState(false);
+  const onPaymentClick = value => {
+    onClick(item, value).then(() => {
+      showSuccess(true);
+      setTimeout(() => {
+        showPayment(false);
+        showSuccess(false);
+      }, 1000);
+    });
+  };
   return (
     <Card
       data-testid={`donate-${item.id}`}
@@ -65,13 +75,21 @@ const DonateCard = ({ item, onClick }) => {
         bottom="0"
         justifyContent="center"
         alignItems="center"
+        flexDirection="column"
       >
-        <Payment
-          onClick={value => {
-            showPayment(false);
-            onClick(item, value);
-          }}
-        />
+        {shouldShowSuccess && (
+          <Text
+            data-testId={`${item.id}-message`}
+            as="div"
+            textAlign="center"
+            fontWeight="bold"
+            color="positive"
+            m="1em 0"
+          >
+            Thanks for donate !
+          </Text>
+        )}
+        <Payment onClick={onPaymentClick} />
         <Box position="absolute" right="10px" top="10px">
           <Button
             data-testid={`${item.id}-closeBtn`}
@@ -88,7 +106,7 @@ const DonateCard = ({ item, onClick }) => {
 
 type DonateCardsProps = {
   items: Charity[],
-  onClick: (item: Charity, amount: number) => void,
+  onClick: (item: Charity, amount: number) => Promise<any>,
 };
 
 const DonateCards = ({ items, onClick }: DonateCardsProps) => {

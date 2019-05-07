@@ -54,18 +54,16 @@ describe('App component', () => {
     });
     const { getByTestId, getAllByTestId } = queries;
     const donations = getByTestId('donations');
-    const message = getByTestId('message');
 
     expect(getCharities).toHaveBeenCalledTimes(1);
 
     expect(getPayments).toHaveBeenCalledTimes(1);
-    expect(donations.textContent).toBe('All donations: 0');
-    expect(message.textContent).toBe('');
+    expect(donations.textContent).toBe('All donations (THB): 0');
     waitForElement(() => {
       return getAllByTestId(/^donate-/);
     }).then(cards => {
       expect(cards.length).toBe(1);
-      expect(donations.textContent).toBe('All donations: 10');
+      expect(donations.textContent).toBe('All donations (THB): 10');
       done();
     });
   });
@@ -85,18 +83,13 @@ describe('App component', () => {
       fireEvent.click(donateBtn);
       let payment = getByTestId('payment-payBtn');
 
-      const message = getByTestId('message');
       const donations = getByTestId('donations');
       fireEvent.click(payment);
       const { id, currency } = charities[0];
 
-      jest.useFakeTimers();
       wait(sendPayment).then(() => {
         expect(sendPayment).toHaveBeenCalledWith({ id, currency, amount: 10 });
-        expect(donations.textContent).toBe('All donations: 20');
-        expect(message.textContent).toBe('Thanks for donate 10!');
-        jest.runAllTimers();
-        expect(message.textContent).toBe('');
+        expect(donations.textContent).toBe('All donations (THB): 20');
         done();
       });
     });
