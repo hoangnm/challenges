@@ -49,15 +49,17 @@ export default function App() {
         Tamboon React
       </Text>
       <Text data-testid="donations" as="p" textAlign="center">
-        All donations: {donate}
+        All donations:{' '}
+        <Text as="span" fontWeight="bold" color="positive">
+          {donate}
+        </Text>
       </Text>
       <Text
         data-testId="message"
         as="p"
         textAlign="center"
         fontWeight="bold"
-        fontSize="16px"
-        color="red"
+        color="positive"
         m="1em 0"
       >
         {message}

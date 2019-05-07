@@ -16,6 +16,12 @@ const theme = {
   shadows: {
     card: `0px 4px 8px 1px ${colors.grey1}`,
   },
+  fontWeights: {
+    light: 100,
+    normal: 400,
+    medium: 500,
+    bold: 700,
+  },
 };
 
 export default theme;
